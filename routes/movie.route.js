@@ -2,12 +2,11 @@ const express = require("express");
 const router = express.Router();
 const connection = require("../config");
 
+const { getAllMovies } = require("../controllers/movie.controller");
+
 // http://localhost:5000/movies
-router.get("/", (request, response) => {
-  connection.query("SELECT * FROM movies", (err, results) => {
-    if (err) response.status(500).send(err);
-    response.json(results);
-  });
+router.get("/", getAllMovies, (req, res, next) => {
+  res.json(req.movies);
 });
 
 // http://localhost:5000/movies/1

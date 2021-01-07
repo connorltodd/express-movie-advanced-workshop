@@ -1,10 +1,12 @@
 const express = require("express");
+var morgan = require("morgan");
 const app = express();
 
 const connection = require("./config");
 const moviesRouter = require("./routes/movie.route");
 
 app.use(express.json());
+app.use(morgan(""));
 app.use("/movies", moviesRouter);
 
 connection.connect((err) => {
